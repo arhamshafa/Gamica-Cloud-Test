@@ -73,14 +73,14 @@
         }
         #userName_login{
             margin: 15px;
-            color: white;
+            color: black;
             width: 200px;
             height: 30px;
             border: 4px solid black;
         }
         #userPassword_login{
             margin: 15px;
-            color: white;
+            color: black;
             width: 200px;
             height: 30px;
             border: 4px solid black; 
@@ -166,7 +166,7 @@
     <script>
         let accounts = getFromDB();
         let accountFOund;
-        // when user click on button forms are appeared.......//
+
         function showSignUpForm() {
             signupForm.classList.remove("hide");
             loginForm.classList.add("hide");
@@ -177,7 +177,7 @@
             signupForm.classList.add("hide");
             saveToDB();
         }
-        // singUp form ki values ko get kr k array mai push kiya
+
 
         class Account {
             title = " ";
@@ -202,15 +202,15 @@
             saveToDB();
         }
 
-        // save data to local storage...............//
+
         function saveToDB() {
             localStorage.setItem("myAccount", JSON.stringify(accounts));
         }
-        // Access data from local storage
+
         function getFromDB() {
             return JSON.parse(localStorage.getItem("myAccount") || "[]");
         }
-        //  login form ki values ko chech kiya k wo singup form sai milti hai....//
+        
         function login() {
             event.preventDefault();
             let userName = userName_login.value;
@@ -232,7 +232,7 @@
             }
             saveToDB();
         }
-        //  deposit amount ko total amount mai add kiya aur transaction update
+        
         function depositMoney() {
             let newAMount = +prompt("Enter money you want to deposit");
             accountFOund.balance += newAMount;
