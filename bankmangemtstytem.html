@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bank Application</title>
+    <style>
+        .hide {
+            display: none;
+        }
+
+        .withdraw {
+            color: red;
+        }
+
+        .deposit {
+            color: green;
+        }
+
+        #dashboard {
+            border: 1px solid orange;
+        }
+        #userName{
+            margin: 10px;
+            width: 200px;
+            height: 30px;
+            border: 4px solid black;
+        }
+        #userPassword{
+            margin: 10px;
+            width: 200px;
+            height: 30px;
+            border: 4px solid black; 
+        }
+        #userAmount{
+            margin: 10px;
+            width: 200px;
+            height: 30px;
+            border: 4px solid black;  
+        }
+        #sign{
+            width: 100px;
+            height: 50px;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: large;
+            margin: 10px;
+
+        }
+        #log{
+            width: 100px;
+            height: 50px;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: large;
+            margin: 10px;
+        }
+        #account{
+            margin: 10px;
+            width: 200px;
+            height: 50px;
+            background-color: black;
+            color: white;
+            border-radius: 20px;
+            border: none;
+            font-size: large;
+        }
+        #userName_login{
+            margin: 15px;
+            color: white;
+            width: 200px;
+            height: 30px;
+            border: 4px solid black;
+        }
+        #userPassword_login{
+            margin: 15px;
+            color: white;
+            width: 200px;
+            height: 30px;
+            border: 4px solid black; 
+        }
+        #loginn{
+            margin: 10px;
+            width: 200px;
+            height: 50px;
+            background-color: black;
+            color: white;
+            border-radius: 20px;
+            border: none;
+            font-size: large;
+        }
+
+    </style>
+</head>
+
+<body>
+    <center>
+        <img src="data:image/png;base64,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" />
+    <div>
+        <button id="sign" onclick="showSignUpForm()">Sign-Up</button>
+        <button id="log" onclick="showLoginForm()">Log-In</button>
+    </div>
+    <form onsubmit="singUp()" id="signupForm" class="hide">
+        <div>
+            <input type="text" id="userName" placeholder="Enter Your Name" />
+        </div>
+        <div>
+            <input type="password" id="userPassword" placeholder="Enter Your Password " />
+        </div>
+        <div>
+            <input type="number" id="userAmount" placeholder="Enter Your Amount" />
+        </div>
+        <div>
+            Current<input value="current" name="accountType" class="accountType" type="radio" />
+            Saving <input value="saving" name="accountType" class="accountType" type="radio" />
+        </div>
+        <button onclick="show()" id="account">Create Account</button>
+    </form>
+    <!-- Login Form  -->
+    <form onsubmit="login()" id="loginForm" class="hide">
+        <div>
+            <input type="text" id="userName_login" placeholder="Enter Your Name" />
+        </div>
+        <div>
+            <input type="password" id="userPassword_login" placeholder="Enter Your Password" />
+        </div>
+        <button id="loginn">Login</button>
+    </form>
+    <!-- Dashboard when user login  -->
+    <div id="dashboard" class="hide">
+        <table border="1">
+            <tr>
+                <td>Name : </td>
+                <td id="namebox"></td>
+                <tr>
+                    <td>Balance : </td>
+                <td id="balancebox"></td>
+                </tr>
+                <td>
+                    <button onclick="depositMoney()">Deposit Money</button>
+                    <button onclick="withdrawMoney()">Withdraw Money</button>
+                </td>
+            </tr>
+        </table>
+        <center>
+            <h3>Transactions</h3>
+        </center>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody id="transactionsTable"></tbody>
+        </table>
+    </div>
+    </center>
+    <script>
+        let accounts = getFromDB();
+        let accountFOund;
+        // when user click on button forms are appeared.......//
+        function showSignUpForm() {
+            signupForm.classList.remove("hide");
+            loginForm.classList.add("hide");
+            saveToDB();
+        }
+        function showLoginForm() {
+            loginForm.classList.remove("hide");
+            signupForm.classList.add("hide");
+            saveToDB();
+        }
+        // singUp form ki values ko get kr k array mai push kiya
+
+        class Account {
+            title = " ";
+            password = " ";
+            balance = " ";
+            transaction = " ";
+        }
+
+        function singUp() {
+            event.preventDefault();
+
+            let type = document.querySelector(".accountType:checked").value;
+
+            let account = new Account;
+
+
+            account.title = userName.value;
+            account.password = userPassword.value;
+            account.balance = +userAmount.value;
+            account.transactions = [];
+            accounts.push(account);
+            saveToDB();
+        }
+
+        // save data to local storage...............//
+        function saveToDB() {
+            localStorage.setItem("myAccount", JSON.stringify(accounts));
+        }
+        // Access data from local storage
+        function getFromDB() {
+            return JSON.parse(localStorage.getItem("myAccount") || "[]");
+        }
+        //  login form ki values ko chech kiya k wo singup form sai milti hai....//
+        function login() {
+            event.preventDefault();
+            let userName = userName_login.value;
+            let userPassword = userPassword_login.value;
+            accountFOund = accounts.find((account) => {
+                if (
+                    account.title == userName &&
+                    account.password == userPassword
+                ) {
+                    return true;
+                }
+            });
+            if (accountFOund) {
+                dashboard.classList.remove("hide");
+                updateUser();
+                alert("Welcom to Dashboard");
+            } else {
+                alert("Check your name and password again");
+            }
+            saveToDB();
+        }
+        //  deposit amount ko total amount mai add kiya aur transaction update
+        function depositMoney() {
+            let newAMount = +prompt("Enter money you want to deposit");
+            accountFOund.balance += newAMount;
+            let newTransaction = {
+                type: "DEPOSIT",
+                amount: newAMount,
+                date: new Date().toDateString(),
+            };
+            accountFOund.transactions.push(newTransaction);
+
+            let lastTransactions = accountFOund.transactions.slice(accountFOund.transactions.length - 4);
+
+            if (lastTransactions.length == 4) {
+
+                let sareyDepositHen = true;
+
+                for (let item of lastTransactions) {
+                    if (item.type != "DEPOSIT") {
+                        sareyDepositHen = false;
+                        break;
+                    }
+                }
+
+                if (sareyDepositHen) {
+
+                    let newTransaction = {
+                        type: "PROFIT",
+                        amount: accountFOund.balance * 0.05,
+                        date: new Date().toDateString(),
+                    };
+
+                    accountFOund.balance = accountFOund.balance + newTransaction.amount;
+                    accountFOund.transactions.push(newTransaction);
+
+                }
+
+            }
+
+
+            updateUser();
+            saveToDB();
+        }
+
+        function withdrawMoney() {
+            try {
+                let newAMount = +prompt("Enter Money you want to withdraw");
+                if (newAMount > accountFOund.balance) {
+                    throw "your balace is insufficient";
+                }
+                accountFOund.balance -= newAMount;
+                let newTransaction = {
+                    type: "WITHDRAW",
+                    amount: newAMount,
+                    date: new Date().toDateString(),
+                };
+                accountFOund.transactions.push(newTransaction);
+                updateUser();
+                saveToDB();
+            } catch (myError) {
+                console.log(myError);
+            }
+        }
+        function updateUser() {
+            namebox.innerText = accountFOund.title;
+            balancebox.innerText = accountFOund.balance;
+            transactionsTable.innerHTML = "";
+            accountFOund.transactions.forEach((transaction) => {
+                transactionsTable.innerHTML +=
+                    "<tr class=" +
+                    transaction.type.toLowerCase() +
+                    "><td>" +
+                    transaction.date +
+                    "</td><td>" +
+                    transaction.amount +
+                    "</td><td>" +
+                    transaction.type +
+                    "</td></tr>";
+            });
+            saveToDB();
+        }
+        function show(){
+            alert("Account is Created Now Login")
+        }
+    </script>
+</body>
+
+</html>
